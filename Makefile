@@ -1,0 +1,47 @@
+NAME = so_long
+CC = cc
+FLAGS = -Wall -Wextra -Werror -g
+RM = rm -rf
+
+SRC_DIR = srcs
+OBJ_DIR = objs
+INC_DIR = includes
+LIBFT_DIR = libft
+MLX_DIR = mlx
+
+HEADER = $(INC_DIR)/so_long.h
+SRCS = main.c
+SRC_FILES = $(addprefix $(SRC_DIR)/, $(SRCS))
+OBJS = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+LIBFT = $(LIBFT_DIR)/libft.a
+MLX_LIB = $(MLX_DIR)/libmlx.a
+INCLUDES = -I$(LIBFT_DIR) -I$(INC_DIR) -I$(MLX_DIR)
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
+
+$(NAME): $(OBJS) $(LIBFT) $(MLX_LIB)
+	$(CC) $(FLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME) $(MLX_FLAGS)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
+
+$(LIBFT):
+	make -C $(LIBFT_DIR)
+
+$(MLX_LIB):
+	make -C $(MLX_DIR)
+
+all: $(NAME)
+
+clean:
+	$(RM) $(OBJ_DIR)
+	make -C $(LIBFT_DIR) clean
+	make -C $(MLX_DIR) clean
+
+fclean: clean
+	$(RM) $(NAME) $(LIBFT)
+
+re: fclean all
+
+.PHONY: all clean fclean re
