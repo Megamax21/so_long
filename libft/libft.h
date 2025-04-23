@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml-hote <ml-hote@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:29:25 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/03/31 09:14:40 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/24 01:36:47 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <unistd.h>
+# include "./printf/ft_printf.h"
+#include "get_next_line.h"
 
 /* Modification on libft's linked list !
 Instead of using the original void pointer as the content type
