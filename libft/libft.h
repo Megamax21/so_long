@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ml-hote <ml-hote@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:29:25 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/24 06:43:43 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/24 16:50:11 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <unistd.h>
-# include "./printf/ft_printf.h"
-#include "gnl/get_next_line.h"
+# include "printf/ft_printf.h"
+# include "gnl/get_next_line.h"
 
 /* Modification on libft's linked list !
 Instead of using the original void pointer as the content type
@@ -75,6 +75,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(char *));
 t_list	*ft_lstnew(char *content);
 t_list	*ft_lstlast(t_list *lst);
-t_list	*ft_lstmap(t_list *lst, char *(*f)(char *), void (*del)(char *));
+t_list	*ft_lstmap(t_list *lst, char *(*f)(char *), void (*del)(void *));
 
 #endif // LIBFT

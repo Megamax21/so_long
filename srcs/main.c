@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ml-hote <ml-hote@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:52:40 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/24 03:52:40 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/24 16:42:52 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int	main(int ac, char **av)
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
 	if (ac != 2)
-		return (-1);
+	{
+		ft_printf("Error\nUsage : %s map.ber");
+		exit(1);
+	}
 	
 	ft_put_image(mlx, mlx_win, "./imgs/spr_john_0.xpm", 300, 150);
 	ft_ber_to_array(ft_strjoin(ft_strjoin("./maps/", av[1]), ".ber"));

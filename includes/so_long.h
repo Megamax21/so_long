@@ -1,6 +1,6 @@
 #include "../mlx/mlx.h"
 #include "../mlx/mlx_int.h"
-#include "libft.h"
+#include "../libft/libft.h"
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -18,3 +18,5 @@ void	ft_put_image(void *mlx, void *window, char *img_path, int x, int y);
 char 	**ft_ber_to_array(char *map_path);
 char	**ft_convert_list_to_array(t_list *list);
 void	ft_error(const char *msg);
+void	ft_verify_map(char **map_arr);
+void	ft_verify_walls(char **map_arr);

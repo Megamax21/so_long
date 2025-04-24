@@ -15,11 +15,10 @@ SRC_FILES = $(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 LIBFT = $(LIBFT_DIR)/libft.a
-MLX_LIB = $(MLX_DIR)/libmlx.a
 INCLUDES = -I$(LIBFT_DIR) -I$(INC_DIR) -I$(MLX_DIR)
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX_LIB)
+$(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(FLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME) $(MLX_FLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
@@ -29,19 +28,26 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-$(MLX_LIB):
-	make -C $(MLX_DIR)
-
 all: $(NAME)
 
 clean:
 	$(RM) $(OBJ_DIR)
 	make -C $(LIBFT_DIR) clean
-	make -C $(MLX_DIR) clean
 
 fclean: clean
 	$(RM) $(NAME) $(LIBFT)
 
 re: fclean all
+
+mlx :
+	@wget https://cdn.intra.42.fr/document/document/26928/minilibx-linux.tgz
+	@tar -xvzf ./minilibx-linux.tgz
+	@rm minilibx-linux.tgz
+	@mv minilibx-linux/ mlx/
+	@cd mlx
+	@make -C mlx/
+
+end :
+	@rm -rf mlx
 
 .PHONY: all clean fclean re

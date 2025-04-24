@@ -34,20 +34,20 @@ OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
-$(NAME): $(OBJS) $(OBJS_BONUS) $(PRINTF) $(GNL)
+$(NAME): $(OBJS) $(OBJS_BONUS) $(PRINTF)
 	ar rcs -o $(NAME) $(OBJS) $(OBJS_BONUS)
 
 $(PRINTF):
-	make -C $(PRINTF_DIR)
+	@make -C $(PRINTF_DIR)
 
 .c.o:
-	cc $(FLAGS) -c $< -o $@
+	@cc $(FLAGS) -c $< -o $@
 
 all: $(NAME)
 
 clean:
 	$(RM) $(OBJS) $(OBJS_BONUS)
-	make -C $(PRINTF_DIR) clean
+	@make -C $(PRINTF_DIR) clean
 
 fclean : clean
 	$(RM) $(NAME) $(PRINTF)

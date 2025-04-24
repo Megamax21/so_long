@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ml-hote <ml-hote@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 02:49:58 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/24 06:59:18 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/24 08:09:49 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,12 @@ char	**ft_convert_list_to_array(t_list *list)
 		player can acess both the collectibles 
 		& the exit
 */
-void ft_verify_map(char **map_arr)
+void	ft_verify_map(char **map_arr)
 {
-	
+	ft_verify_walls(map_arr);	
 }
+
+void	ft_verify_walls(char **map_arr)
+{
+	printf("Yes... %i ?", map_arr[0][0]);
+} 
