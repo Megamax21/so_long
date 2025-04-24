@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:29:25 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/24 01:36:47 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/24 06:43:43 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stddef.h>
 # include <unistd.h>
 # include "./printf/ft_printf.h"
-#include "get_next_line.h"
+#include "gnl/get_next_line.h"
 
 /* Modification on libft's linked list !
 Instead of using the original void pointer as the content type
@@ -27,7 +27,7 @@ values
 */
 typedef struct s_list
 {
-	int				content;
+	char			*content;
 	int				index;
 	struct s_list	*next;
 }		t_list;
@@ -70,11 +70,11 @@ void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstdelone(t_list *lst, void (*del)(int));
-void	ft_lstclear(t_list **lst, void (*del)(int));
-void	ft_lstiter(t_list *lst, void (*f)(int));
-t_list	*ft_lstnew(int content);
+void	ft_lstdelone(t_list *lst, void (*del)(char *));
+void	ft_lstclear(t_list **lst, void (*del)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(char *));
+t_list	*ft_lstnew(char *content);
 t_list	*ft_lstlast(t_list *lst);
-t_list	*ft_lstmap(t_list *lst, int(*f)(int), void (*del)(int));
+t_list	*ft_lstmap(t_list *lst, char *(*f)(char *), void (*del)(char *));
 
 #endif // LIBFT

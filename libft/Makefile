@@ -40,8 +40,6 @@ $(NAME): $(OBJS) $(OBJS_BONUS) $(PRINTF) $(GNL)
 $(PRINTF):
 	make -C $(PRINTF_DIR)
 
-
-
 .c.o:
 	cc $(FLAGS) -c $< -o $@
 

@@ -1,61 +1,47 @@
-# **************************************************************************** #
-#                           LIBFT + PRINTF + GNL                               #
-# **************************************************************************** #
+NAME = so_long
+CC = cc
+FLAGS = -Wall -Wextra -Werror -g
+RM = rm -rf
 
-# === Compilation & Tools ===
-CC      := cc
-CFLAGS  := -Wall -Wextra -Werror
-RM      := rm -f
+SRC_DIR = srcs
+OBJ_DIR = objs
+INC_DIR = includes
+LIBFT_DIR = libft
+MLX_DIR = mlx
 
-# === Libs ===
-NAME        := libft.a
-PRINTF_DIR  := printf
-GNL_DIR     := gnl
-PRINTF_LIB  := $(PRINTF_DIR)/libftprintf.a
-GNL_LIB     := $(GNL_DIR)/libgnl.a
+HEADER = $(INC_DIR)/so_long.h
+SRCS = main.c map_parse.c
+SRC_FILES = $(addprefix $(SRC_DIR)/, $(SRCS))
+OBJS = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-# === Source Files ===
-SRCS := ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
-	ft_isprint.c ft_memcpy.c ft_memset.c ft_strchr.c ft_strlcat.c \
-	ft_strlcpy.c ft_strlen.c ft_strrchr.c ft_tolower.c ft_toupper.c \
-	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_bzero.c \
-	ft_memchr.c ft_putnbr_fd.c ft_memcmp.c ft_memmove.c ft_strnstr.c \
-	ft_strncmp.c ft_calloc.c ft_strdup.c ft_itoa.c ft_substr.c \
-	ft_strjoin.c ft_strtrim.c ft_split.c ft_strmapi.c ft_striteri.c \
-	ft_safe_atoi.c
+LIBFT = $(LIBFT_DIR)/libft.a
+MLX_LIB = $(MLX_DIR)/libmlx.a
+INCLUDES = -I$(LIBFT_DIR) -I$(INC_DIR) -I$(MLX_DIR)
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 
-BONUS_SRCS := ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
-	ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
-	ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
+$(NAME): $(OBJS) $(LIBFT) $(MLX_LIB)
+	$(CC) $(FLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME) $(MLX_FLAGS)
 
-OBJS        := $(SRCS:.c=.o)
-OBJS_BONUS  := $(BONUS_SRCS:.c=.o)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
-# === Targets ===
+$(LIBFT):
+	make -C $(LIBFT_DIR)
 
-all: $(NAME) libs
+$(MLX_LIB):
+	make -C $(MLX_DIR)
 
-$(NAME): $(OBJS)
-	ar rcs $@ $^
-
-bonus: $(OBJS) $(OBJS_BONUS)
-	ar rcs $(NAME) $^
-
-libs:
-	@echo "Building Printf & GNL..."
-	$(MAKE) -C $(PRINTF_DIR)
-	$(MAKE) -C $(GNL_DIR)
+all: $(NAME)
 
 clean:
-	$(RM) $(OBJS) $(OBJS_BONUS)
-	$(MAKE) -C $(PRINTF_DIR) clean
-	$(MAKE) -C $(GNL_DIR) clean
+	$(RM) $(OBJ_DIR)
+	make -C $(LIBFT_DIR) clean
+	make -C $(MLX_DIR) clean
 
 fclean: clean
-	$(RM) $(NAME)
-	$(MAKE) -C $(PRINTF_DIR) fclean
-	$(MAKE) -C $(GNL_DIR) fclean
+	$(RM) $(NAME) $(LIBFT)
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re libs
+.PHONY: all clean fclean re

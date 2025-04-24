@@ -6,13 +6,13 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:52:40 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/24 00:20:46 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/24 03:52:40 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	void	*mlx;
 	void	*mlx_win;
@@ -21,22 +21,14 @@ int	main(void)
 	printf("INIT !\n");
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	// img.img = mlx_new_image(mlx, 1920, 1080);
-	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-	// 							&img.endian);
-
-	printf("1 !\n");
-	// int	i = 200;
-	// while (i < 500)
-	// {
-	// 	my_mlx_pixel_put(&img, i, 50, 0x00FF0000);
-	// 	i++;
-	// }
-	printf("2 !\n");
+	if (ac != 2)
+		return (-1);
+	
 	ft_put_image(mlx, mlx_win, "./imgs/spr_john_0.xpm", 300, 150);
-	printf("3 !\n");
-	// mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	ft_ber_to_array(ft_strjoin(ft_strjoin("./maps/", av[1]), ".ber"));
 	mlx_loop(mlx);
+
+	return (0);
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -53,8 +45,6 @@ void	ft_put_image(void *mlx, void *window, char *img_path, int x, int y)
 	int		h;
 	int		w;
 
-	printf("TEST 1 !\n");
 	img = mlx_xpm_file_to_image(mlx, img_path, &w, &h);
-	printf("w : %i\th : %i\n", w, h);
 	mlx_put_image_to_window(mlx, window, img, x, y);
 }
