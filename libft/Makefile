@@ -28,17 +28,17 @@ SRCS_BONUS = ft_lstnew_bonus.c\
 	ft_lstiter_bonus.c\
 	ft_lstmap_bonus.c\
 
-OBJS = $(SRCS:.c=.o)
+SRCS_PRINTF= printf/ft_printf.c                                            \
+             printf/conversions/ft_print_u.c        printf/conversions/ft_print_xX.c\
+             printf/conversions/ft_print_chars.c    printf/conversions/ft_print_p.c \
+             printf/utils/ft_putchar_fd.c           printf/utils/ft_itoa.c
 
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
+ALL_SRCS   = $(SRCS) $(SRCS_BONUS) $(SRCS_PRINTF)
 
-PRINTF = $(PRINTF_DIR)/libftprintf.a
+OBJS       = $(ALL_SRCS:.c=.o)
 
-$(NAME): $(OBJS) $(OBJS_BONUS) $(PRINTF)
-	ar rcs -o $(NAME) $(OBJS) $(OBJS_BONUS)
-
-$(PRINTF):
-	@make -C $(PRINTF_DIR)
+$(NAME): $(OBJS)
+	ar rcs -o $(NAME) $(OBJS)
 
 .c.o:
 	@cc $(FLAGS) -c $< -o $@
@@ -46,11 +46,10 @@ $(PRINTF):
 all: $(NAME)
 
 clean:
-	$(RM) $(OBJS) $(OBJS_BONUS)
-	@make -C $(PRINTF_DIR) clean
+	$(RM) $(OBJS)
 
 fclean : clean
-	$(RM) $(NAME) $(PRINTF)
+	$(RM) $(NAME)
     
 re: fclean all
 
