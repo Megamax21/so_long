@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:52:40 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/28 05:22:33 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/28 05:59:08 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ int	main(int ac, char **av)
 		exit(1);
 	}
 	my_datas = ft_new_data(mlx_init());
-	my_datas->win = mlx_new_window(my_datas->mlx, 1920, 1080, "Hello world!");
 	temp = ft_strjoin("./maps/", av[1]);
 	path = ft_strjoin(temp, ".ber");
 	free(temp);
 	my_datas->map = ft_ber_to_array(path);
 	free(path);
 	ft_verify_map(&my_datas);
+	my_datas->win = mlx_new_window(my_datas->mlx,
+			ft_get_map_w(my_datas->map) * 32,
+			ft_get_map_h(my_datas->map) * 32, "Hello world!");
 	ft_draw_map(my_datas);
 	mlx_hook(my_datas->win, 2, 1L << 0, ft_key_press, my_datas);
 	mlx_hook(my_datas->win, 17, 0L, (int (*)())ft_close_window, my_datas);
