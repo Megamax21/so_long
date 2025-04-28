@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 06:32:52 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/25 06:41:53 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/28 03:51:12 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,31 @@ char	**ft_dup_map(char **map)
 	}
 	new_map[i] = NULL;
 	return (new_map);
+}
+
+int	ft_count_tile(char **map, char tile)
+{
+	int	i;
+	int	w;
+	int	h;
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	w = ft_get_map_w(map);
+	h = ft_get_map_h(map);
+	i = 0;
+	while (y < (h - 1))
+	{
+		while (x < (w - 1))
+		{
+			if (map[y][x] == tile)
+				i++;
+			x++;
+		}
+		x = 1;
+		y++;
+	}
+	return (i);
 }

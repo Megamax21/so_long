@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 07:02:00 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/25 09:17:48 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/28 05:28:17 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	ft_draw_map(t_data *myDatas)
 	{
 		while (j < w)
 		{
-			ft_put_square(myDatas, j * 32, i * 32,
-				ft_get_color(myDatas->map[i][j]));
+			ft_put_img(myDatas, i, j);
 			j++;
 		}
 		j = 0;
@@ -36,17 +35,28 @@ void	ft_draw_map(t_data *myDatas)
 	}
 }
 
-int	ft_get_color(char c)
+void	*ft_get_img(char c, t_data *data)
 {
 	if (c == '1')
-		return (0x00F0E0B6);
+		return (data->img_wall);
 	if (c == '0')
-		return (0x00000000);
+		return (data->img_floor);
 	if (c == 'P')
-		return (0x005583C9);
+		return (data->img_player);
 	if (c == 'C')
-		return (0x00FCE300);
+		return (data->img_collectible);
 	if (c == 'E')
-		return (0x008C0017);
+	{
+		if (data->exit_state == 1)
+			return (data->img_exit_1);
+		else
+			return (data->img_exit_0);
+	}
 	return (0);
+}
+
+void	ft_put_img(t_data *data, int i, int j)
+{
+	mlx_put_image_to_window(data->mlx, data->win,
+		ft_get_img(data->map[i][j], data), j * 32, i * 32);
 }

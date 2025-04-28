@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 06:33:13 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/25 07:05:18 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/28 05:27:28 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,25 @@ char	**ft_convert_list_to_array(t_list *list)
 t_data	*ft_new_data(void *mlx)
 {
 	t_data	*new;
+	int		w;
+	int		h;
 
 	new = (t_data *)malloc(sizeof(t_data));
 	new->mlx = mlx;
 	new->win = NULL;
 	new->map = NULL;
+	new->exit_state = 0;
+	new->img_collectible = mlx_xpm_file_to_image(new->mlx,
+			"./imgs/collectible.xpm", &w, &h);
+	new->img_floor = mlx_xpm_file_to_image(new->mlx,
+			"./imgs/floor.xpm", &w, &h);
+	new->img_exit_0 = mlx_xpm_file_to_image(new->mlx,
+			"./imgs/exit_0.xpm", &w, &h);
+	new->img_exit_1 = mlx_xpm_file_to_image(new->mlx,
+			"./imgs/exit_1.xpm", &w, &h);
+	new->img_player = mlx_xpm_file_to_image(new->mlx,
+			"./imgs/player_0.xpm", &w, &h);
+	new->img_wall = mlx_xpm_file_to_image(new->mlx,
+			"./imgs/wall.xpm", &w, &h);
 	return (new);
 }

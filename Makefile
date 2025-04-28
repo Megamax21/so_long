@@ -10,7 +10,7 @@ LIBFT_DIR = libft
 MLX_DIR = mlx
 
 HEADER = $(INC_DIR)/so_long.h
-SRCS = main.c map_parse.c map_parse_check.c map_parse_utils.c utils.c draw_utils.c map_draw.c
+SRCS = main.c map_parse.c map_parse_check.c map_parse_utils.c utils.c map_draw.c player_moves.c
 SRC_FILES = $(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
