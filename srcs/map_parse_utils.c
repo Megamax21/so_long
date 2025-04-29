@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 06:32:52 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/28 03:51:12 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/29 04:26:49 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	**ft_dup_map(char **map)
 		i++;
 	}
 	new_map[i] = NULL;
+	ft_free_char_array(map);
 	return (new_map);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 06:33:13 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/28 05:27:28 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/29 06:54:51 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ void	ft_error(const char *msg)
 	}
 	else
 		write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
 }
 
-char	**ft_convert_list_to_array(t_list *list)
+char	**ft_convert_list_to_array(t_list *list, t_data *data)
 {
 	char	**array;
 	int		i;
@@ -33,7 +32,7 @@ char	**ft_convert_list_to_array(t_list *list)
 
 	i = 0;
 	width = -1;
-	array = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
+	array = ft_calloc(ft_lstsize(list) + 1, sizeof(char *));
 	if (!array)
 		ft_error("Malloc didn't malloc");
 	tmp = list;
@@ -42,11 +41,13 @@ char	**ft_convert_list_to_array(t_list *list)
 		if (width == -1)
 			width = ft_strlen(tmp->content);
 		else if (ft_strlen(tmp->content) != (size_t)width)
-			ft_error("Map isn't a rectangle");
+			ft_free_not_rectangle(data, array, list);
 		array[i++] = ft_strdup(tmp->content);
 		tmp = tmp->next;
 	}
 	array[i] = NULL;
+	ft_lstclear(&tmp, free);
+	ft_lstclear(&list, free);
 	return (array);
 }
 
@@ -74,4 +75,31 @@ t_data	*ft_new_data(void *mlx)
 	new->img_wall = mlx_xpm_file_to_image(new->mlx,
 			"./imgs/wall.xpm", &w, &h);
 	return (new);
+}
+
+int	ft_check_if_ber(char *name)
+{
+	int	l;
+
+	if (name)
+	{
+		l = ft_strlen(name);
+		if (l > 5)
+		{
+			if (name[l - 1] == 'r' && name[l - 2] == 'e'
+				&& name[l - 3] == 'b' && name[l - 4] == '.'
+				&& ft_isprint(name[l - 5]))
+				return (1);
+		}
+	}
+	return (0);
+}
+
+void	ft_free_not_rectangle(t_data *data, char **arr, t_list *list)
+{
+	ft_error("Map isn't a rectangle");
+	ft_free_char_array(arr);
+	ft_free_char_array(data->map);
+	ft_lstclear(&list, free);
+	ft_close_window(data);
 }

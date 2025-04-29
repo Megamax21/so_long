@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml-hote <ml-hote@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:32:44 by ml-hote           #+#    #+#             */
-/*   Updated: 2024/11/15 14:32:59 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/28 18:13:56 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		if (str == NULL)
 			return (NULL);
 		i = -1;
-		while (s1[++i])
+		while (s1 && s1[++i])
 			str[i] = s1[i];
 		i = -1;
-		while (s2[++i])
+		while (s2 && s2[++i])
 		{
 			str[len1] = s2[i];
 			len1++;

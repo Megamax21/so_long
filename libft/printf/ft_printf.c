@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml-hote <ml-hote@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 10:12:34 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/01/09 18:05:52 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/28 18:14:30 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_printf(const char *str, ...)
 	i = 0;
 	print_length = 0;
 	va_start(args, str);
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] == '%')
 		{

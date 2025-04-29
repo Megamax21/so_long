@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:52:40 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/28 05:59:08 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/29 06:53:21 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,19 @@
 int	main(int ac, char **av)
 {
 	t_data	*my_datas;
-	char	*temp;
-	char	*path;
+	char	**map_1;
 
+	my_datas = NULL;
 	if (ac != 2)
 	{
 		ft_printf("Error\nUsage : %s map", av[0]);
 		exit(1);
 	}
 	my_datas = ft_new_data(mlx_init());
-	temp = ft_strjoin("./maps/", av[1]);
-	path = ft_strjoin(temp, ".ber");
-	free(temp);
-	my_datas->map = ft_ber_to_array(path);
-	free(path);
+	map_1 = ft_ber_to_array(av[1], my_datas);
+	my_datas->map = ft_dup_map(map_1);
 	ft_verify_map(&my_datas);
+	ft_free_char_array(map_1);
 	my_datas->win = mlx_new_window(my_datas->mlx,
 			ft_get_map_w(my_datas->map) * 32,
 			ft_get_map_h(my_datas->map) * 32, "Hello world!");
@@ -44,6 +42,14 @@ int	ft_close_window(t_data *data)
 {
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, data->img_collectible);
+	mlx_destroy_image(data->mlx, data->img_exit_0);
+	mlx_destroy_image(data->mlx, data->img_exit_1);
+	mlx_destroy_image(data->mlx, data->img_floor);
+	mlx_destroy_image(data->mlx, data->img_player);
+	mlx_destroy_image(data->mlx, data->img_wall);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
 	free(data);
 	exit(0);
 }
@@ -64,4 +70,20 @@ int	ft_key_press(int keycode, t_data *data)
 		&& data->p_y == data->e_y)
 		ft_close_window(data);
 	return (0);
+}
+
+void	ft_free_char_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	if (!array)
+		return ;
+	while (array[i] != NULL)
+	{
+		if (array[i])
+			free(array[i]);
+		i++;
+	}
+	free(array);
 }

@@ -6,18 +6,24 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 02:49:58 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/28 03:51:23 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/29 06:49:48 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-char	**ft_ber_to_array(char *map_path)
+char	**ft_ber_to_array(char *map_path, t_data *data)
 {
 	int		map_fd;
 	t_list	*lines;
 	char	*line;
+	char	**return_arr;
 
+	if (ft_check_if_ber(map_path) == 0)
+	{
+		ft_printf("Error\nFile is not a .ber file\n");
+		ft_close_window(data);
+	}
 	map_fd = open(map_path, O_RDONLY);
 	if (map_fd == -1)
 		ft_error(map_path);
@@ -30,8 +36,8 @@ char	**ft_ber_to_array(char *map_path)
 		ft_lstadd_back(&lines, ft_lstnew(ft_strtrim(line, "\n")));
 		free(line);
 	}
-	return (ft_convert_list_to_array(lines));
-	ft_lstclear(&lines, free);
+	return_arr = ft_convert_list_to_array(lines, data);
+	return (return_arr);
 }
 
 /* Map verification will be done in multiple parts
@@ -51,38 +57,40 @@ void	ft_verify_map(t_data **data)
 
 	width = ft_get_map_w((*data)->map);
 	height = ft_get_map_h((*data)->map);
-	ft_check_strange_char((*data)->map, width, height);
-	ft_verify_walls((*data)->map, width, height);
-	ft_check_player_on_map((*data)->map, width, height);
-	ft_check_exit_on_map((*data)->map, 0);
-	ft_check_collectibles_on_map((*data)->map, 0);
-	ft_check_map_after_flood((*data)->map);
+	ft_check_strange_char((*data), width, height);
+	ft_verify_walls((*data), width, height);
+	ft_check_player_on_map(*data, width, height);
 	ft_assign_player_pos(data, width, height);
+	ft_check_exit_on_map((*data));
+	ft_check_collectibles_on_map((*data));
+	ft_check_map_after_flood((*data));
 	ft_assign_exit_pos(data);
 	(*data)->collectibles = ft_count_tile((*data)->map, 'C');
 }
 
-void	ft_verify_walls(char **map_arr, int w, int h)
+void	ft_verify_walls(t_data *data, int w, int h)
 {
 	int	i;
 
 	i = 0;
 	while (i < w)
 	{
-		if (map_arr[0][i] != '1' || map_arr[h - 1][i] != '1')
+		if (data->map[0][i] != '1' || data->map[h - 1][i] != '1')
 		{
 			ft_printf("Error\nMap isn't surrounded by walls !\n");
-			exit(1);
+			ft_free_char_array(data->map);
+			ft_close_window(data);
 		}
 		i++;
 	}
 	i = 0;
 	while (i < h)
 	{
-		if (map_arr[i][0] != '1' || map_arr[i][w - 1] != '1')
+		if (data->map[i][0] != '1' || data->map[i][w - 1] != '1')
 		{
 			ft_printf("Error\nMap isn't surrounded by walls !\n");
-			exit(1);
+			ft_free_char_array(data->map);
+			ft_close_window(data);
 		}
 		i++;
 	}
