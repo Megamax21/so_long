@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parse_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ml-hote <ml-hote@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 06:35:15 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/29 06:52:35 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:32:30 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_check_map_after_flood(t_data *data)
 {
 	char	**map_tmp;
 
-	map_tmp = ft_dup_map(data->map);
+	map_tmp = ft_dup_map(data->map, 0);
 	ft_flood_fill(map_tmp, data->p_x, data->p_y);
 	if (ft_count_tile(map_tmp, 'C') > 0
 		|| ft_count_tile(map_tmp, 'E') > 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ml-hote <ml-hote@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 03:55:40 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/29 07:24:40 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:32:52 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		ft_error(const char *msg);
 int			ft_get_map_h(char **map);
 int			ft_get_map_w(char **map);
 void		ft_flood_fill(char **map, int x, int y);
-char		**ft_dup_map(char **map);
+char		**ft_dup_map(char **map, int free_map);
 t_data		*ft_new_data(void	*mlx);
 void		ft_put_img(t_data *data, int i, int j);
 void		ft_draw_map(t_data *myDatas);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ml-hote <ml-hote@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:52:40 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/29 07:01:26 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:44:22 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	main(int ac, char **av)
 	}
 	my_datas = ft_new_data(mlx_init());
 	map_1 = ft_ber_to_array(av[1], my_datas);
-	my_datas->map = ft_dup_map(map_1);
+	my_datas->map = ft_dup_map(map_1, 1);
+	
 	ft_verify_map(&my_datas);
 	ft_free_char_array(map_1);
 	my_datas->win = mlx_new_window(my_datas->mlx,
@@ -56,6 +57,9 @@ int	ft_close_window(t_data *data)
 
 int	ft_key_press(int keycode, t_data *data)
 {
+	int	move_init;
+
+	move_init = data->p_moves;
 	if (keycode == 65307)
 		ft_close_window(data);
 	else if (keycode == 119)
@@ -69,7 +73,8 @@ int	ft_key_press(int keycode, t_data *data)
 	if (data->collectibles == 0 && data->p_x == data->e_x
 		&& data->p_y == data->e_y)
 		ft_close_window(data);
-	ft_printf("Moves : %i\n", data->p_moves);
+	if (move_init != data->p_moves)
+		ft_printf("Moves : %i\n", data->p_moves);
 	return (0);
 }
 

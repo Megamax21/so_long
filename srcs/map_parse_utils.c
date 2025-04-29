@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parse_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ml-hote <ml-hote@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 06:32:52 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/29 07:20:04 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:40:28 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	ft_get_map_h(char **map)
 
 int	ft_get_map_w(char **map)
 {
-	ft_printf("map [0][0] = %i\n", ft_strlen(map[0]));
 	return (ft_strlen(map[0]));
 }
 
@@ -39,7 +38,7 @@ void	ft_flood_fill(char **map, int x, int y)
 	ft_flood_fill(map, x, y - 1);
 }
 
-char	**ft_dup_map(char **map)
+char	**ft_dup_map(char **map, int free_map)
 {
 	int		i;
 	char	**new_map;
@@ -55,7 +54,8 @@ char	**ft_dup_map(char **map)
 		i++;
 	}
 	new_map[i] = NULL;
-	ft_free_char_array(map);
+	if (free_map == 1)
+		ft_free_char_array(map);
 	return (new_map);
 }
 
