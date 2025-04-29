@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 02:49:58 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/29 06:49:48 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/29 07:24:36 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_verify_map(t_data **data)
 {
 	int		width;
 	int		height;
-
+	
 	width = ft_get_map_w((*data)->map);
 	height = ft_get_map_h((*data)->map);
 	ft_check_strange_char((*data), width, height);
@@ -64,7 +64,7 @@ void	ft_verify_map(t_data **data)
 	ft_check_exit_on_map((*data));
 	ft_check_collectibles_on_map((*data));
 	ft_check_map_after_flood((*data));
-	ft_assign_exit_pos(data);
+	ft_assign_exit_pos(*data);
 	(*data)->collectibles = ft_count_tile((*data)->map, 'C');
 }
 
@@ -120,25 +120,26 @@ void	ft_assign_player_pos(t_data **data, int w, int h)
 	}
 }
 
-void	ft_assign_exit_pos(t_data **data)
+void	ft_assign_exit_pos(t_data *data)
 {
 	int	w;
 	int	h;
 	int	x;
 	int	y;
 
-	x = 0;
-	y = 0;
-	w = ft_get_map_w((*data)->map);
-	h = ft_get_map_h((*data)->map);
+	x = 1;
+	y = 1;
+
+	w = ft_get_map_w(data->map);
+	h = ft_get_map_h(data->map);
 	while (y < (h - 1))
 	{
 		while (x < (w - 1))
 		{
-			if ((*data)->map[y][x] == 'E')
+			if ((data->map)[y][x] == 'E')
 			{
-				(*data)->e_x = x;
-				(*data)->e_y = y;
+				data->e_x = x;
+				data->e_y = y;
 				return ;
 			}
 			x++;

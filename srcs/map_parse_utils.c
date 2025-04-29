@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 06:32:52 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/29 04:26:49 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/29 07:20:04 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	ft_get_map_h(char **map)
 
 int	ft_get_map_w(char **map)
 {
+	ft_printf("map [0][0] = %i\n", ft_strlen(map[0]));
 	return (ft_strlen(map[0]));
 }
 

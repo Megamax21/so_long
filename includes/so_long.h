@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 03:55:40 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/29 06:49:43 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/29 07:24:40 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_data
 	char	**map;
 	int		p_x;
 	int		p_y;
+	int		p_moves;
 	int		e_x;
 	int		e_y;
 	int		collectibles;
@@ -51,7 +52,7 @@ int			ft_close_window(t_data *data);
 int			ft_key_press(int keycode, t_data *data);
 void		ft_assign_player_pos(t_data **data, int w, int h);
 int			ft_count_tile(char **map, char tile);
-void		ft_assign_exit_pos(t_data **data);
+void		ft_assign_exit_pos(t_data *data);
 void		ft_free_char_array(char **array);
 void		ft_free_not_rectangle(t_data *data, char **arr, t_list *list);
 

@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 06:33:13 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/29 06:54:51 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/29 06:57:45 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_data	*ft_new_data(void *mlx)
 	new->mlx = mlx;
 	new->win = NULL;
 	new->map = NULL;
+	new->p_moves = 0;
 	new->exit_state = 0;
 	new->img_collectible = mlx_xpm_file_to_image(new->mlx,
 			"./imgs/collectible.xpm", &w, &h);

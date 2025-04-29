@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:52:40 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/29 06:53:21 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/29 07:01:26 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,17 @@ int	ft_key_press(int keycode, t_data *data)
 	if (keycode == 65307)
 		ft_close_window(data);
 	else if (keycode == 119)
-		ft_move_up(&data);
+		data->p_moves += ft_move_up(&data);
 	else if (keycode == 115)
-		ft_move_down(&data);
+		data->p_moves += ft_move_down(&data);
 	else if (keycode == 97)
-		ft_move_left(&data);
+		data->p_moves += ft_move_left(&data);
 	else if (keycode == 100)
-		ft_move_right(&data);
+		data->p_moves += ft_move_right(&data);
 	if (data->collectibles == 0 && data->p_x == data->e_x
 		&& data->p_y == data->e_y)
 		ft_close_window(data);
+	ft_printf("Moves : %i\n", data->p_moves);
 	return (0);
 }
 
