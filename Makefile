@@ -28,7 +28,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-all: $(NAME)
+all: mlx $(NAME)
 
 clean:
 	$(RM) $(OBJ_DIR)
@@ -37,7 +37,7 @@ clean:
 fclean: clean
 	$(RM) $(NAME) $(LIBFT)
 
-re: fclean all
+re: end all
 
 mlx :
 	@wget https://cdn.intra.42.fr/document/document/26928/minilibx-linux.tgz
@@ -47,7 +47,7 @@ mlx :
 	@cd mlx
 	@make -C mlx/
 
-end :
+end : fclean
 	@rm -rf mlx
 
 .PHONY: all clean fclean re

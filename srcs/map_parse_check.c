@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 06:35:15 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/29 18:32:30 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/30 04:49:01 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,17 +94,15 @@ int	ft_check_collectibles_on_map(t_data *data)
 	return (c);
 }
 
-void	ft_check_map_after_flood(t_data *data)
+void	ft_check_map_after_flood(t_data *data, char **map_tmp)
 {
-	char	**map_tmp;
-
-	map_tmp = ft_dup_map(data->map, 0);
 	ft_flood_fill(map_tmp, data->p_x, data->p_y);
 	if (ft_count_tile(map_tmp, 'C') > 0
 		|| ft_count_tile(map_tmp, 'E') > 0)
 	{
 		ft_printf("Error\nExit or collectible isn't accessible by player\n");
 		ft_free_char_array(map_tmp);
+		ft_free_char_array(data->map);
 		ft_close_window(data);
 	}
 	ft_free_char_array(map_tmp);

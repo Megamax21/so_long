@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 03:55:40 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/29 18:32:52 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/30 20:49:04 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,13 @@ int			ft_count_tile(char **map, char tile);
 void		ft_assign_exit_pos(t_data *data);
 void		ft_free_char_array(char **array);
 void		ft_free_not_rectangle(t_data *data, char **arr, t_list *list);
+int			ft_close_win_free_map(t_data *data);
 
 /* Map Parsing */
 int			ft_check_if_ber(char *name);
 void		ft_verify_map(t_data **data);
 void		ft_verify_walls(t_data *data, int w, int h);
-void		ft_check_map_after_flood(t_data *data);
+void		ft_check_map_after_flood(t_data *data, char **map_tmp);
 void		ft_check_player_on_map(t_data *data, int w, int h);
 int			ft_check_collectibles_on_map(t_data *data);
 int			ft_check_exit_on_map(t_data *data);

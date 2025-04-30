@@ -6,7 +6,7 @@
 /*   By: ml-hote <ml-hote@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 02:49:58 by ml-hote           #+#    #+#             */
-/*   Updated: 2025/04/29 18:39:27 by ml-hote          ###   ########.fr       */
+/*   Updated: 2025/04/30 20:57:37 by ml-hote          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	ft_verify_map(t_data **data)
 {
 	int		width;
 	int		height;
-	
+	char	**map_tmp;
+
 	width = ft_get_map_w((*data)->map);
 	height = ft_get_map_h((*data)->map);
 	ft_check_strange_char((*data), width, height);
@@ -63,7 +64,8 @@ void	ft_verify_map(t_data **data)
 	ft_assign_player_pos(data, width, height);
 	ft_check_exit_on_map((*data));
 	ft_check_collectibles_on_map((*data));
-	ft_check_map_after_flood((*data));
+	map_tmp = ft_dup_map((*data)->map, 0);
+	ft_check_map_after_flood((*data), map_tmp);
 	ft_assign_exit_pos(*data);
 	(*data)->collectibles = ft_count_tile((*data)->map, 'C');
 }
@@ -129,7 +131,6 @@ void	ft_assign_exit_pos(t_data *data)
 
 	x = 1;
 	y = 1;
-
 	w = ft_get_map_w(data->map);
 	h = ft_get_map_h(data->map);
 	while (y < (h - 1))
